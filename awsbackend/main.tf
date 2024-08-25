@@ -1,7 +1,7 @@
 terraform {
   # Run init/plan/apply with "backend" commented-out (ueses local backend) to provision Resources (Bucket, Table)
   # Then uncomment "backend" and run init, apply after Resources have been created (uses AWS)
-/*
+#/*
   backend "s3" {
     bucket         = "multinucleo-tfstate-backend-cicd"
     key            = "tf-infra/terraform.tfstate"
@@ -9,7 +9,7 @@ terraform {
     dynamodb_table = "multinucleo-backend-tfstate-locking"
     encrypt        = true
   }
-*/
+#*/
 
   required_version = ">=0.13.0"
   required_providers {
@@ -27,12 +27,12 @@ provider "aws" {
 }
 
 module "tf-state" {
-  source      = "./modules/tf-state"
+  source      = "../modules/tf-state"
   bucket_name = "multinucleo-tfstate-backend-cicd"
 }
 
 module "vpc-infra" {
-  source = "./modules/vpc"
+  source = "../modules/vpc"
 
   # VPC Input Vars
   vpc_cidr             = local.vpc_cidr
