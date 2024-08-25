@@ -1,134 +1,134 @@
-resource "aws_vpc" "ccVPC" {
+resource "aws_vpc" "MultinucleoVPC" {
   cidr_block       = var.vpc_cidr
   instance_tenancy = "default"
   tags = {
-    Name    = "ccVPC"
-    Project = "CC TF Demo"
+    Name    = "MultinucleoVPC"
+    Project = "Multinucleo TF Code"
   }
 }
 
-resource "aws_internet_gateway" "ccIGW" {
-  vpc_id = aws_vpc.ccVPC.id
+resource "aws_internet_gateway" "MultinucleoIGW" {
+  vpc_id = aws_vpc.MultinucleoVPC.id
   tags = {
-    Name    = "ccIGW"
-    Project = "CC TF Demo"
+    Name    = "MultinucleoIGW"
+    Project = "Multinucleo TF Code"
   }
 }
 
-resource "aws_eip" "ccNatGatewayEIP1" {
+resource "aws_eip" "MultinucleoNatGatewayEIP1" {
   tags = {
-    Name    = "ccNatGatewayEIP1"
-    Project = "CC TF Demo"
+    Name    = "MultinucleoNatGatewayEIP1"
+    Project = "Multinucleo TF Code"
   }
 }
-resource "aws_nat_gateway" "ccNatGateway1" {
-  allocation_id = aws_eip.ccNatGatewayEIP1.id
-  subnet_id     = aws_subnet.ccPublicSubnet1.id
+resource "aws_nat_gateway" "MultinucleoNatGateway1" {
+  allocation_id = aws_eip.MultinucleoNatGatewayEIP1.id
+  subnet_id     = aws_subnet.MultinucleoPublicSubnet1.id
   tags = {
-    Name    = "ccNatGateway1"
-    Project = "CC TF Demo"
+    Name    = "MultinucleoNatGateway1"
+    Project = "Multinucleo TF Code"
   }
 }
-resource "aws_subnet" "ccPublicSubnet1" {
-  vpc_id            = aws_vpc.ccVPC.id
+resource "aws_subnet" "MultinucleoPublicSubnet1" {
+  vpc_id            = aws_vpc.MultinucleoVPC.id
   cidr_block        = var.public_subnet_cidrs[0]
   availability_zone = var.availability_zones[0]
   tags = {
-    Name    = "ccPublicSubnet1"
-    Project = "CC TF Demo"
+    Name    = "MultinucleoPublicSubnet1"
+    Project = "Multinucleo TF Code"
   }
 }
 
-resource "aws_eip" "ccNatGatewayEIP2" {
+resource "aws_eip" "MultinucleoNatGatewayEIP2" {
   tags = {
-    Name    = "ccNatGatewayEIP2"
-    Project = "CC TF Demo"
+    Name    = "MultinucleoNatGatewayEIP2"
+    Project = "Multinucleo TF Code"
   }
 }
-resource "aws_nat_gateway" "ccNatGateway2" {
-  allocation_id = aws_eip.ccNatGatewayEIP2.id
-  subnet_id     = aws_subnet.ccPublicSubnet1.id
+resource "aws_nat_gateway" "MultinucleoNatGateway2" {
+  allocation_id = aws_eip.MultinucleoNatGatewayEIP2.id
+  subnet_id     = aws_subnet.MultinucleoPublicSubnet1.id
   tags = {
-    Name    = "ccNatGateway2"
-    Project = "CC TF Demo"
+    Name    = "MultinucleoNatGateway2"
+    Project = "Multinucleo TF Code"
   }
 }
-resource "aws_subnet" "ccPublicSubnet2" {
-  vpc_id            = aws_vpc.ccVPC.id
+resource "aws_subnet" "MultinucleoPublicSubnet2" {
+  vpc_id            = aws_vpc.MultinucleoVPC.id
   cidr_block        = var.public_subnet_cidrs[1]
   availability_zone = var.availability_zones[1]
   tags = {
-    Name    = "ccPublicSubnet2"
-    Project = "CC TF Demo"
+    Name    = "MultinucleoPublicSubnet2"
+    Project = "Multinucleo TF Code"
   }
 }
 
-resource "aws_subnet" "ccPrivateSubnet1" {
-  vpc_id            = aws_vpc.ccVPC.id
+resource "aws_subnet" "MultinucleoPrivateSubnet1" {
+  vpc_id            = aws_vpc.MultinucleoVPC.id
   cidr_block        = var.private_subnet_cidrs[0]
   availability_zone = var.availability_zones[0]
   tags = {
-    Name    = "ccPrivateSubnet1"
-    Project = "CC TF Demo"
+    Name    = "MultinucleoPrivateSubnet1"
+    Project = "Multinucleo TF Code"
   }
 }
-resource "aws_subnet" "ccPrivateSubnet2" {
-  vpc_id            = aws_vpc.ccVPC.id
+resource "aws_subnet" "MultinucleoPrivateSubnet2" {
+  vpc_id            = aws_vpc.MultinucleoVPC.id
   cidr_block        = var.private_subnet_cidrs[1]
   availability_zone = var.availability_zones[1]
   tags = {
-    Name    = "ccPrivateSubnet2"
-    Project = "CC TF Demo"
+    Name    = "MultinucleoPrivateSubnet2"
+    Project = "Multinucleo TF Code"
   }
 }
 
-resource "aws_route_table" "ccPublicRT" {
-  vpc_id = aws_vpc.ccVPC.id
+resource "aws_route_table" "MultinucleoPublicRT" {
+  vpc_id = aws_vpc.MultinucleoVPC.id
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.ccIGW.id
+    gateway_id = aws_internet_gateway.MultinucleoIGW.id
   }
   tags = {
-    Name    = "ccPublicRT"
-    Project = "CC TF Demo"
+    Name    = "MultinucleoPublicRT"
+    Project = "Multinucleo TF Code"
   }
 }
-resource "aws_route_table" "ccPrivateRT1" {
-  vpc_id = aws_vpc.ccVPC.id
+resource "aws_route_table" "MultinucleoPrivateRT1" {
+  vpc_id = aws_vpc.MultinucleoVPC.id
   route {
     cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.ccNatGateway1.id
+    nat_gateway_id = aws_nat_gateway.MultinucleoNatGateway1.id
   }
   tags = {
-    Name    = "ccPrivateRT1"
-    Project = "CC TF Demo"
+    Name    = "MultinucleoPrivateRT1"
+    Project = "Multinucleo TF Code"
   }
 }
-resource "aws_route_table" "ccPrivateRT2" {
-  vpc_id = aws_vpc.ccVPC.id
+resource "aws_route_table" "MultinucleoPrivateRT2" {
+  vpc_id = aws_vpc.MultinucleoVPC.id
   route {
     cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.ccNatGateway2.id
+    nat_gateway_id = aws_nat_gateway.MultinucleoNatGateway2.id
   }
   tags = {
-    Name    = "ccPrivateRT2"
-    Project = "CC TF Demo"
+    Name    = "MultinucleoPrivateRT2"
+    Project = "Multinucleo TF Code"
   }
 }
 
-resource "aws_route_table_association" "ccPublicRTassociation1" {
-  subnet_id      = aws_subnet.ccPublicSubnet1.id
-  route_table_id = aws_route_table.ccPublicRT.id
+resource "aws_route_table_association" "MultinucleoPublicRTassociation1" {
+  subnet_id      = aws_subnet.MultinucleoPublicSubnet1.id
+  route_table_id = aws_route_table.MultinucleoPublicRT.id
 }
-resource "aws_route_table_association" "ccPublicRTassociation2" {
-  subnet_id      = aws_subnet.ccPublicSubnet2.id
-  route_table_id = aws_route_table.ccPublicRT.id
+resource "aws_route_table_association" "MultinucleoPublicRTassociation2" {
+  subnet_id      = aws_subnet.MultinucleoPublicSubnet2.id
+  route_table_id = aws_route_table.MultinucleoPublicRT.id
 }
-resource "aws_route_table_association" "ccPrivateRTassociation1" {
-  subnet_id      = aws_subnet.ccPrivateSubnet1.id
-  route_table_id = aws_route_table.ccPrivateRT1.id
+resource "aws_route_table_association" "MultinucleoPrivateRTassociation1" {
+  subnet_id      = aws_subnet.MultinucleoPrivateSubnet1.id
+  route_table_id = aws_route_table.MultinucleoPrivateRT1.id
 }
-resource "aws_route_table_association" "ccPrivateRTassociation2" {
-  subnet_id      = aws_subnet.ccPrivateSubnet2.id
-  route_table_id = aws_route_table.ccPrivateRT2.id
+resource "aws_route_table_association" "MultinucleoPrivateRTassociation2" {
+  subnet_id      = aws_subnet.MultinucleoPrivateSubnet2.id
+  route_table_id = aws_route_table.MultinucleoPrivateRT2.id
 }

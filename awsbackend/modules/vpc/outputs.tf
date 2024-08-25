@@ -1,20 +1,20 @@
-output "cc_vpc_id" {
+output "Multinucleo_vpc_id" {
   description = "VPC Id"
-  value       = aws_vpc.ccVPC.id
+  value       = aws_vpc.MultinucleoVPC.id
 }
 
-output "cc_public_subnets" {
+output "Multinucleo_public_subnets" {
   description = "Will be used by Web Server Module to set subnet_ids"
   value = [
-    aws_subnet.ccPublicSubnet1,
-    aws_subnet.ccPublicSubnet2
+    aws_subnet.MultinucleoPublicSubnet1,
+    aws_subnet.MultinucleoPublicSubnet2
   ]
 }
 
-output "cc_private_subnets" {
+output "Multinucleo_private_subnets" {
   description = "Will be used by RDS Module to set subnet_ids"
   value = [
-    aws_subnet.ccPrivateSubnet1,
-    aws_subnet.ccPrivateSubnet2
+    aws_subnet.MultinucleoPrivateSubnet1,
+    aws_subnet.MultinucleoPrivateSubnet2
   ]
 }

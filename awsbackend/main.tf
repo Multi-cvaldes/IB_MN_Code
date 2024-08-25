@@ -3,10 +3,10 @@ terraform {
   # Then uncomment "backend" and run init, apply after Resources have been created (uses AWS)
 /*
   backend "s3" {
-    bucket         = "terraform-state-backend-cicd"
+    bucket         = "multinucleo-tfstate-backend-cicd"
     key            = "tf-infra/terraform.tfstate"
     region         = "eu-west-1"
-    dynamodb_table = "terraform-state-locking"
+    dynamodb_table = "multinucleo-backend-tfstate-locking"
     encrypt        = true
   }
 */
@@ -28,7 +28,7 @@ provider "aws" {
 
 module "tf-state" {
   source      = "./modules/tf-state"
-  bucket_name = "terraform-state-backend-cicd"
+  bucket_name = "multinucleo-tfstate-backend-cicd"
 }
 
 module "vpc-infra" {
